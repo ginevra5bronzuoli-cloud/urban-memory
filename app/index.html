@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aura | Assistente adattivo</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <aside class="sidebar" aria-label="Navigazione principale">
+        <div class="brand">
+          <span class="brand-mark">A</span>
+          <div>
+            <strong>Aura</strong>
+            <span>Adaptive day OS</span>
+          </div>
+        </div>
+
+        <nav class="nav-list">
+          <button class="nav-item active" type="button" data-view="dashboard" title="Home">
+            <span>⌂</span>
+            <b>Home</b>
+          </button>
+          <button class="nav-item" type="button" data-view="nutrition" title="Nutrizione">
+            <span>◍</span>
+            <b>Nutrizione</b>
+          </button>
+          <button class="nav-item" type="button" data-view="care" title="Cura">
+            <span>✦</span>
+            <b>Cura</b>
+          </button>
+          <button class="nav-item" type="button" data-view="diary" title="Diario">
+            <span>☾</span>
+            <b>Diario</b>
+          </button>
+          <button class="nav-item" type="button" data-view="insights" title="Insight">
+            <span>⌁</span>
+            <b>Insight</b>
+          </button>
+          <button class="nav-item" type="button" data-view="profile" title="Profilo">
+            <span>◌</span>
+            <b>Profilo</b>
+          </button>
+        </nav>
+
+        <section class="mode-panel" aria-label="Modalità interfaccia">
+          <p>Modalità</p>
+          <div class="segmented" role="group" aria-label="Scegli modalità">
+            <button type="button" class="segment active" data-mode="calm">Calm</button>
+            <button type="button" class="segment" data-mode="focus">Focus</button>
+            <button type="button" class="segment" data-mode="recovery">Recovery</button>
+          </div>
+        </section>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar" data-panel="dashboard">
+          <div>
+            <p class="eyebrow">Martedì, 12 maggio</p>
+            <h1>Adaptive Cognitive Assistant</h1>
+          </div>
+          <button class="icon-button" type="button" id="resetDay" title="Ripristina demo">↺</button>
+        </header>
+
+        <section class="quick-entry mental-entry" aria-label="Input mentale libero">
+          <label for="quickInput">Racconta in una frase cosa sta succedendo</label>
+          <div class="quick-row">
+            <input id="quickInput" type="text" autocomplete="off" placeholder="Es. oggi sono scarico, devo studiare 2 ore e cenare leggero" />
+            <button type="button" id="quickAdd">Adatta</button>
+          </div>
+        </section>
+
+        <section class="ai-core" aria-label="Cervello AI">
+          <button class="brain-button" type="button" id="brainButton" aria-label="Apri chat AI">
+            <span class="brain-glow"></span>
+            <span class="brain">
+              <span class="fold fold-a"></span>
+              <span class="fold fold-b"></span>
+              <span class="fold fold-c"></span>
+              <span class="eye eye-left"></span>
+              <span class="eye eye-right"></span>
+              <span class="smile"></span>
+            </span>
+          </button>
+          <div class="ai-core-copy">
+            <p class="eyebrow">Cervello AI</p>
+            <h2 id="brainMood">Planner attivo</h2>
+            <p>Scrivi o parla con Aura: ogni nuovo dato aggiorna piano, nutrizione, cura e tono dell’interfaccia senza trasformare la giornata in una lista rigida.</p>
+          </div>
+          <section class="chat-panel" id="chatPanel" aria-label="Chat AI">
+            <div class="chat-head">
+              <strong>Chat con Aura</strong>
+              <button class="icon-button small" type="button" id="closeChat" title="Chiudi chat">×</button>
+            </div>
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-input-row">
+              <input id="chatInput" type="text" autocomplete="off" placeholder="Es. sono in ritardo, riorganizza il pomeriggio" />
+              <button type="button" id="voiceButton">Voce</button>
+              <button type="button" id="chatSend">Invia</button>
+            </div>
+          </section>
+        </section>
+
+        <section class="adaptive-banner">
+          <div>
+            <span id="capacityLabel">Capacity score</span>
+            <strong id="capacityScore">68</strong>
+          </div>
+          <p id="coachMessage">Energia media. Manteniamo una giornata realistica: due blocchi focus, pause protette e una routine leggera.</p>
+        </section>
+
+        <section class="planner-summary" id="plannerSummary" aria-label="Sintesi planner"></section>
+
+        <section class="state-river" aria-label="Stato adattivo">
+          <article class="state-card">
+            <span>Energia stimata</span>
+            <strong id="energyValue">6</strong>
+            <p id="energyText">Ritmo medio, blocchi brevi e pause protette.</p>
+          </article>
+          <article class="state-card">
+            <span>Carico cognitivo</span>
+            <strong id="moodValue">6</strong>
+            <p id="moodText">Densità normale, priorità evidenti.</p>
+          </article>
+          <article class="state-card">
+            <span>Recupero</span>
+            <strong id="sleepValue">7h</strong>
+            <p id="sleepText">Routine serale stabile consigliata.</p>
+          </article>
+        </section>
+
+        <section class="main-grid">
+          <article class="panel day-plan" data-panel="dashboard">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Daily life planner</p>
+                <h2>Piano dinamico</h2>
+              </div>
+              <button class="text-button" type="button" id="rebalance">Ribilancia</button>
+            </div>
+            <div class="timeline" id="timeline"></div>
+          </article>
+
+          <article class="panel nutrition-panel" data-panel="nutrition">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Nutrizione & Energia</p>
+                <h2>Fabbisogno adattivo</h2>
+              </div>
+              <span class="pill" id="nutritionStatus">Stima soft</span>
+            </div>
+            <div class="nutrition-grid" id="nutritionGrid"></div>
+            <div class="meal-suggestions" id="mealSuggestions"></div>
+          </article>
+
+          <article class="panel care-panel" data-panel="care">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Cura Personale</p>
+                <h2>Piccole regolazioni</h2>
+              </div>
+              <span class="pill" id="routineCount">0/0</span>
+            </div>
+            <div class="care-grid" id="careGrid"></div>
+          </article>
+
+          <article class="panel diary-panel" data-panel="diary">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Diario</p>
+                <h2>Memoria gentile</h2>
+              </div>
+              <span class="pill" id="diaryStatus">0 note</span>
+            </div>
+            <form class="diary-composer" id="diaryForm">
+              <textarea id="diaryInput" rows="5" placeholder="Scrivi liberamente: com’è andata, cosa è stato difficile, cosa vuoi ricordare..."></textarea>
+              <button class="text-button" type="submit">Salva nel diario</button>
+            </form>
+            <div class="diary-layout">
+              <div class="diary-timeline" id="diaryTimeline"></div>
+              <aside class="diary-insights" id="diaryInsights"></aside>
+            </div>
+          </article>
+
+          <article class="panel task-panel" data-panel="tasks">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Dettaglio attività</p>
+                <h2>Priorità reali</h2>
+              </div>
+              <span class="pill" id="taskCount">0 attivi</span>
+            </div>
+            <div class="task-list" id="taskList"></div>
+          </article>
+
+          <article class="panel insight-panel" data-panel="insights">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Cognitive load</p>
+                <h2>Segnali</h2>
+              </div>
+            </div>
+            <canvas id="loadCanvas" width="560" height="260" aria-label="Grafico carico cognitivo"></canvas>
+            <div class="insight-list" id="insightList"></div>
+          </article>
+
+          <article class="panel profile-panel" data-panel="profile">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Profilo utente</p>
+                <h2>Dati personali e contesto</h2>
+              </div>
+              <span class="pill" id="profileStatus">Da completare</span>
+            </div>
+
+            <form class="profile-form" id="profileForm">
+              <section class="form-section">
+                <h3>Corpo</h3>
+                <div class="form-grid">
+                  <label>
+                    <span>Età</span>
+                    <input type="text" inputmode="numeric" id="profileAge" placeholder="Es. 24" />
+                  </label>
+                  <label>
+                    <span>Peso</span>
+                    <input type="text" inputmode="decimal" id="profileWeight" placeholder="kg" />
+                  </label>
+                  <label>
+                    <span>Sesso</span>
+                    <select id="profileSex">
+                      <option value="">Seleziona</option>
+                      <option value="Donna">Donna</option>
+                      <option value="Uomo">Uomo</option>
+                      <option value="Non binario">Non binario</option>
+                      <option value="Preferisco non dirlo">Preferisco non dirlo</option>
+                    </select>
+                  </label>
+                  <label>
+                    <span>Altezza</span>
+                    <input type="text" inputmode="decimal" id="profileHeight" placeholder="cm" />
+                  </label>
+                </div>
+              </section>
+
+              <section class="form-section">
+                <h3>Alimentazione e medicine</h3>
+                <div class="form-grid two-columns">
+                  <label>
+                    <span>Intolleranze alimentari</span>
+                    <textarea id="profileIntolerances" rows="4" placeholder="Es. lattosio, glutine, nichel"></textarea>
+                  </label>
+                  <label>
+                    <span>Assume medicine?</span>
+                    <select id="profileMedicine">
+                      <option value="">Seleziona</option>
+                      <option value="No">No</option>
+                      <option value="Sì">Sì</option>
+                      <option value="A volte">A volte</option>
+                    </select>
+                  </label>
+                  <label class="wide">
+                    <span>Dettagli medicine</span>
+                    <textarea id="profileMedicineDetails" rows="3" placeholder="Nome, orario o note utili"></textarea>
+                  </label>
+                </div>
+              </section>
+
+              <section class="form-section">
+                <h3>Stato psicologico</h3>
+                <div class="checkbox-grid" aria-label="Stato psicologico">
+                  <label><input type="checkbox" name="psychology" value="Depressione" />Depressione</label>
+                  <label><input type="checkbox" name="psychology" value="Disturbo dell'attenzione" />Disturbo dell'attenzione</label>
+                  <label><input type="checkbox" name="psychology" value="Stress cronico" />Stress cronico</label>
+                  <label><input type="checkbox" name="psychology" value="Burnout" />Burnout</label>
+                  <label><input type="checkbox" name="psychology" value="Ansia" />Ansia</label>
+                  <label><input type="checkbox" name="psychology" value="Sovraccarico" />Sovraccarico</label>
+                </div>
+              </section>
+
+              <section class="form-section">
+                <h3>Ambiente</h3>
+                <div class="form-grid two-columns">
+                  <label>
+                    <span>Ambiente in cui vive</span>
+                    <select id="profileEnvironment">
+                      <option value="">Seleziona</option>
+                      <option value="Casa tranquilla">Casa tranquilla</option>
+                      <option value="Casa condivisa">Casa condivisa</option>
+                      <option value="Ambiente rumoroso">Ambiente rumoroso</option>
+                      <option value="Ambiente urbano intenso">Ambiente urbano intenso</option>
+                      <option value="Ambiente isolato">Ambiente isolato</option>
+                    </select>
+                  </label>
+                  <label>
+                    <span>Città</span>
+                    <input type="text" id="profileCity" placeholder="Es. Roma" />
+                  </label>
+                </div>
+              </section>
+
+              <section class="form-section">
+                <h3>Abitudini, obiettivi e casa</h3>
+                <div class="form-grid two-columns">
+                  <label>
+                    <span>Abitudini quotidiane</span>
+                    <textarea id="profileHabits" rows="3" placeholder="Es. sveglia alle 8, studio al mattino, palestra 3 volte"></textarea>
+                  </label>
+                  <label>
+                    <span>Obiettivi</span>
+                    <textarea id="profileGoals" rows="3" placeholder="Studio, fitness, produttività, benessere"></textarea>
+                  </label>
+                  <label>
+                    <span>Animali domestici</span>
+                    <select id="profilePets">
+                      <option value="">Seleziona</option>
+                      <option value="No">No</option>
+                      <option value="Cane">Cane</option>
+                      <option value="Gatto">Gatto</option>
+                      <option value="Più animali">Più animali</option>
+                    </select>
+                  </label>
+                  <label>
+                    <span>Piante da curare</span>
+                    <select id="profilePlants">
+                      <option value="">Seleziona</option>
+                      <option value="No">No</option>
+                      <option value="Poche">Poche</option>
+                      <option value="Molte">Molte</option>
+                    </select>
+                  </label>
+                </div>
+              </section>
+            </form>
+
+            <aside class="profile-summary" aria-label="Riepilogo profilo">
+              <h3>Riepilogo adattivo</h3>
+              <div id="profileSummary"></div>
+            </aside>
+          </article>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
